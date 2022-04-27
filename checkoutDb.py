@@ -75,7 +75,9 @@ def checkSubExist(values):
             collection.delete_one({'_id': doc['_id']})
             markExist=False
       return markExist
+values=collection.find({'destDir': {"$ne": ""}, 'sub': {"$ne": []}}, {'_id': 1,'destDir':1, 'sourceDir':1, 'sub':1 }).limit(0)
 
+checkMuxExistTotal(values)
         
 #if(collection.find_one({'_id': 1}, {'sub': 1}))['sub']==[]:
 #    print("Empty")
