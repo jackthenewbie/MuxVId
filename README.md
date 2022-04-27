@@ -26,7 +26,7 @@ python3 getTarget.py
 python3 MuxLocal.py
 ```
 ## Optional
-Removed files already mux (aka exists in destDir in database)
+Removed database of files already exists (aka exists in destDir in database)
 ```
 python3 checkoutDb.py
 ```
