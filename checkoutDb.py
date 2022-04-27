@@ -35,6 +35,8 @@ def getParentDirName(filePath):
             if count>1:
                 return True
     return False
+session=getParentDirName(dest)
+collection=db[f'Session:{session}']
 session=getParentDirName(dest) #get session name down here
 collection=db[f'Session:{session}']
 def checkExist(destDir):
@@ -52,6 +54,7 @@ def checkMuxExistTotal(values): #Null destDir if destDir not exist
             collection.update_one( {'_id': doc['_id']}, {'$set': {'destDir': f''}} )
         else:
             print("------------------------Muxed file existed-----------------")
+            print(session)
             collection.delete_one({'_id': doc['_id']})
             markExist=True
       return markExist
@@ -78,7 +81,3 @@ def checkSubExist(values):
 values=collection.find({'destDir': {"$ne": ""}, 'sub': {"$ne": []}}, {'_id': 1,'destDir':1, 'sourceDir':1, 'sub':1 }).limit(0)
 
 checkMuxExistTotal(values)
-        
-#if(collection.find_one({'_id': 1}, {'sub': 1}))['sub']==[]:
-#    print("Empty")
-#collection.delete_many([])
