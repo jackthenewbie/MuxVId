@@ -290,8 +290,3 @@ def main():
     print(f"\ndb: {db}")
     collection.insert_many(db)
 main()
-#target = re.search(r'[a-zA-Z0-9]', videoFile)
-#print(target.group())
-#rclone lsf "oD_tutao:Course/LapTrinh/[ DevCourseWeb.com ] Udemy - MS SQL Server - Basics
-#To Advanced/" --files-only -R --include '*.{{mp4|mkv|mov|avi}}'
-#"oD_tutao:Course/LapTrinh/[ DevCourseWeb.com ] Udemy - MS SQL Server - Basics To Advanced//~Get Your Files Here !/09 - PL SQL Final Session & Wind Up"
