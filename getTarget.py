@@ -81,6 +81,10 @@ def removeWordInIgnore(searchNameTarget, customIgnoreWords):
         if word in searchNameTarget: #Remove word that should be ignore
             searchNameTarget.remove(word)
     return searchNameTarget
+def replaceSlash(path):
+    if "//" in path:
+        return replaceSlash(path.replace("//", "/"))
+    return path
 def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     customIgnoreWords=['HEVC','BD','DBD', 'Webrip', 'BDRip', 'FLAC', "bluray", "BluRay"]
     fileNameWithoutExtension=os.path.splitext(os.path.basename(filePath))[0]
@@ -291,7 +295,7 @@ def main():
             if (args.limit_search==0 and countMatch==1) or (args.limit_search>0 and countMatch==args.limit_search):
                 break
         if subs != []:
-            db.append(generateMux(count, 0, dest, line.strip(), subs))
+            db.append(generateMux(count, 0, dest, replaceSlash(line.strip()), subs))
         else:
             print(f"This video: {line.strip()} has no subs")
         #print("\nSubs:",subs)
