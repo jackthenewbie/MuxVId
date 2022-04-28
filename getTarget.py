@@ -79,7 +79,8 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     #print(f"specialEncode: {specialEncode}")
     #Special encode removal
     if specialEncode!=None:
-        for index in range(len(searchNameTarget)):
+        temp=searchNameTarget
+        for index in range(len(temp)):
             try:
                 if searchNameTarget[index].lower()=='h'\
                     and searchNameTarget[index+1].lower()=='264' or searchNameTarget[index+1].lower()=='265':
