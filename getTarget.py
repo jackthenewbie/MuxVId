@@ -281,7 +281,10 @@ def main():
                 print(f"{line.strip()} NOT MATCHED {sub.strip()}")
             if (args.limit_search==0 and countMatch==1) or (args.limit_search>0 and countMatch==args.limit_search):
                 break
-        db.append(generateMux(count, 0, dest, line.strip(), subs))
+        if subs != []:
+            db.append(generateMux(count, 0, dest, line.strip(), subs))
+        else:
+            print(f"This video: {line.strip()} has no subs")
         #print("\nSubs:",subs)
     print(f"\ndb: {db}")
     collection.insert_many(db)
