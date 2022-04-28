@@ -69,7 +69,7 @@ def isnumber(word):
     else:
         return False
 def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
-    customIgnoreWords=['HEVC','BD','DBD', 'Webrip', 'BDRip', 'FLAC']
+    customIgnoreWords=['HEVC','BD','DBD', 'Webrip', 'BDRip', 'FLAC', "bluray"]
     fileNameWithoutExtension=os.path.splitext(os.path.basename(filePath))[0]
     subNameWithoutExtension=os.path.splitext(os.path.basename(subPath))[0]
     searchNameTarget=re.findall(r'\b([a-zA-Z]+|[0-9]+)\b', fileNameWithoutExtension)
@@ -82,8 +82,9 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
         temp=searchNameTarget
         for index in range(len(temp)):
             try:
-                if searchNameTarget[index].lower()=='h'\
+                if searchNameTarget[index].lower()=='h' or searchNameTarget[index].lower()=='x'\
                     and searchNameTarget[index+1].lower()=='264' or searchNameTarget[index+1].lower()=='265':
+                        print("Found encode info")
                         searchNameTarget=searchNameTarget[:index]+searchNameTarget[index+2:]
                         break
             except:
@@ -94,6 +95,8 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
         for bracket in bracketListIgnore:
             toFind=f'\{bracket[0]}([a-zA-Z]+|[0-9]+)\{bracket[1]}'
             searchWordInbracket=re.findall(toFind, fileNameWithoutExtension)
+            if toFind != None:
+                print(f"Ignore: {toFind.group()}")
             customIgnoreWords.extend(searchWordInbracket)
     print(f"searchNameTarget: {searchNameTarget}")
     if searchSeriesTarget!=None and searchSeriesSub!=None: #If series number is found
