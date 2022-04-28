@@ -33,6 +33,12 @@ python3 checkoutDb.py
 ## Attention
 1. Change conf.demo to conf.json
 2. **folderTarget** path must use / instead \
+
 ```
 C:/my/video/to/mux/
+```
+3. **folderTarget** at least has two subfolder to avoid null when detecting destination
+```
+C:/my/video/ <-- this is ok
+C:/myvideo/  <-- this is not ok
 ```
