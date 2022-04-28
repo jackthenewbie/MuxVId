@@ -95,8 +95,8 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
         for bracket in bracketListIgnore:
             toFind=f'\{bracket[0]}([a-zA-Z]+|[0-9]+)\{bracket[1]}'
             searchWordInbracket=re.findall(toFind, fileNameWithoutExtension)
-            if toFind != None:
-                print(f"Ignore: {searchWordInbracket.group()}")
+            if searchWordInbracket != None:
+                print(f"Ignore: {searchWordInbracket}")
             customIgnoreWords.extend(searchWordInbracket)
     print(f"searchNameTarget: {searchNameTarget}")
     if searchSeriesTarget!=None and searchSeriesSub!=None: #If series number is found
