@@ -80,10 +80,13 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     #Special encode removal
     if specialEncode!=None:
         for index in range(len(searchNameTarget)):
-            if searchNameTarget[index].lower()=='h' or searchNameTarget[index].lower()=='H' \
-                and searchNameTarget[index+1].lower()=='264' or searchNameTarget[index+1].lower()=='265':
-                searchNameTarget=searchNameTarget[:index]+searchNameTarget[index+2:]
-                break
+            try:
+                if searchNameTarget[index].lower()=='h'\
+                    and searchNameTarget[index+1].lower()=='264' or searchNameTarget[index+1].lower()=='265':
+                        searchNameTarget=searchNameTarget[:index]+searchNameTarget[index+2:]
+                        break
+            else:
+                continue
     #-----------------------------------------------------
     #Ignore words removal
     if bracketListIgnore!=None:
