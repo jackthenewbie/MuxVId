@@ -167,6 +167,7 @@ def generateDb():
     def generateSubDB(sub, startAt=0):
         subDB=[]
         for file in sub:
+            file=replaceSlash(file)
             startAt+=1
             temp={"_id":startAt, "subtitle":file, "status":0}
             subDB.append(temp)
@@ -196,13 +197,15 @@ def generateMux(indexVid, indexSub, dest, sourceV, subList):
     def generateSubDB(sub, startAt=0):
         subDB=[]
         for file in sub:
+            file=replaceSlash(file)
             startAt+=1
             temp={"_id":startAt, "subtitle":file, "status":0,'delay': 0}
             subDB.append(temp)
         return subDB
+    sourceDir=replaceSlash(f"{dest}/{sourceV}")
     return {
         '_id': indexVid,
-        'sourceDir': f"{dest}/{sourceV}",
+        'sourceDir': sourceDir,
         'destDir': "", #f"{dest}/{destFile}",
         'sub': generateSubDB(subList, indexSub),
         
