@@ -70,6 +70,17 @@ def isnumber(word):
         return False
 def removeWordInBracket(line):
     return re.sub(r'\([^)]*\)', '', line)
+def removeWordInIgnore(searchNameTarget, customIgnoreWords):
+    temp=[]
+    for wordTarget in searchNameTarget:
+        for word in customIgnoreWords:
+            if wordTarget.strip() in word.strip():
+                print(wordTarget)
+                temp.append(wordTarget) #Get the words support to be ignore
+    for word in temp:
+        if word in searchNameTarget: #Remove word that should be ignore
+            searchNameTarget.remove(word)
+    return searchNameTarget
 def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     customIgnoreWords=['HEVC','BD','DBD', 'Webrip', 'BDRip', 'FLAC', "bluray", "BluRay"]
     fileNameWithoutExtension=os.path.splitext(os.path.basename(filePath))[0]
@@ -104,11 +115,7 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     print(f"customIgnoreWords include: {customIgnoreWords}")
     if searchSeriesTarget!=None and searchSeriesSub!=None: #If series number is found
         print(f"searchSeriesTarget: {searchSeriesTarget.group()}")
-    for wordTarget in searchNameTarget:
-        for word in customIgnoreWords:
-            if wordTarget.strip() in word.strip():
-                print(wordTarget)
-                searchNameTarget.remove(wordTarget) #remove word in customIgnoreWords
+    searchNameTarget=removeWordInIgnore(searchNameTarget, customIgnoreWords)
     
     print(f"searchNameTarget after ignore word: {searchNameTarget}")
     
