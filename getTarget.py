@@ -105,11 +105,10 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
         print(f"searchSeriesTarget: {searchSeriesTarget.group()}")
     for wordTarget in searchNameTarget:
         for word in customIgnoreWords:
-            if wordTarget in word:
-                print(f"Current wordTarget being remove: {wordTarget}")
+            if wordTarget.strip() in word.strip():
                 searchNameTarget.remove(wordTarget) #remove word in customIgnoreWords
     
-    print(f"searchNameTarget: {searchNameTarget}")
+    print(f"searchNameTarget after ignore word: {searchNameTarget}")
     
     #print(f"searchNameTarget: {searchNameTarget}")
     #print(f"searchSeriesTarget: {searchSeriesTarget}")
