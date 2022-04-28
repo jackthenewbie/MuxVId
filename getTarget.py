@@ -104,8 +104,8 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     print(f"customIgnoreWords include: {customIgnoreWords}")
     if searchSeriesTarget!=None and searchSeriesSub!=None: #If series number is found
         print(f"searchSeriesTarget: {searchSeriesTarget.group()}")
-    for wordTarget in searchNameTarget:
-        for word in customIgnoreWords:
+    while wordTarget in searchNameTarget:
+        while word in customIgnoreWords:
             if wordTarget.strip() in word.strip():
                 searchNameTarget.remove(wordTarget) #remove word in customIgnoreWords
     
@@ -120,7 +120,7 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     elif(searchSeriesTarget!=None and searchSeriesSub!=None): #detech series
         def remove0(word):
             word=list(word)
-            for c in word:
+            while c in word:
                 if c=="0":
                     word.remove("0")
             return ''.join(word).upper().lower()
