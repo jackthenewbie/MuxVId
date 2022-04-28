@@ -15,7 +15,7 @@ git clone https://github.com/jackthenewbie/MuxVId.git
   3. Data Deployments>Connect>Connect your application> Choose python 3.6 and up> Copy string
 Example:
 ```
-mongodb+srv://john:123456789>@cluster0.npogp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+mongodb+srv://john:123456789@cluster0.npogp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 ```
 1. Generate database
 ```
