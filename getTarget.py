@@ -85,7 +85,7 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
                     and searchNameTarget[index+1].lower()=='264' or searchNameTarget[index+1].lower()=='265':
                         searchNameTarget=searchNameTarget[:index]+searchNameTarget[index+2:]
                         break
-            else:
+            except:
                 continue
     #-----------------------------------------------------
     #Ignore words removal
