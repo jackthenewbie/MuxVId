@@ -88,6 +88,23 @@ def replaceSlash(path):
     if "//" in path:
         return replaceSlash(path.replace("//", "/"))
     return path
+def listNumSmallerThan100(sub):
+    numList=re.findall(r"\b\d+\b", sub)
+    temp=[]
+    for num in numList:
+        print(num)
+        if int(num)<100:
+            temp.append(num)
+    return temp
+def isNumIn(num ,numList):
+    if numList==[]:
+        return False
+    for numI in numList:
+        if not numI.isdigit():
+            return False
+        if int(numI)==num:
+            return True
+    return False
 def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     customIgnoreWords=['HEVC','BD','DBD', 'Webrip', 'BDRip', 'FLAC', "bluray", "BluRay"]
     fileNameWithoutExtension=os.path.splitext(os.path.basename(filePath))[0]
@@ -158,7 +175,11 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
             return True
         #print(countMatch)
     else:
+        tempNumInSub=listNumSmallerThan100(subNameWithoutExtension)
         for word in searchNameTarget:
+            if word.isdigit():
+               if isNumIn(int(word), tempNumInSub):
+                  continue
             if(word.lower() not in subNameWithoutExtension.lower()):
                 print(f"{word} not in {subNameWithoutExtension}\n Not match")
                 return False
