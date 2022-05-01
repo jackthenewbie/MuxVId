@@ -79,6 +79,9 @@ def removeWordInIgnore(searchNameTarget, customIgnoreWords):
                 temp.append(wordTarget) #Get the words support to be ignore
     for word in temp:
         if word in searchNameTarget: #Remove word that should be ignore
+            if word.isdigit():
+                if int(word)<100:
+                    continue
             searchNameTarget.remove(word)
     return searchNameTarget
 def replaceSlash(path):
