@@ -178,8 +178,8 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
         tempNumInSub=listNumSmallerThan100(subNameWithoutExtension)
         for word in searchNameTarget:
             if word.isdigit():
-               if isNumIn(int(word), tempNumInSub):
-                  continue
+               if isNumIn(int(word), tempNumInSub)==False: #Fix num 08 match with 1080p
+                  return False
             if(word.lower() not in subNameWithoutExtension.lower()):
                 print(f"{word} not in {subNameWithoutExtension}\n Not match")
                 return False
