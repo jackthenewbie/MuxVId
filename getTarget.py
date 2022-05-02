@@ -315,7 +315,7 @@ def main():
                 #print(f"{returnParentDir(line.strip())} is only one")
                 subs.append(f"{fullPath}/{sub.strip()}")
                 countMatch+=1
-            if(matchVideoAndSubtitle(line.strip(), sub.strip(), bracket)):
+            elif(matchVideoAndSubtitle(line.strip(), sub.strip(), bracket)):
                 print(f"{line.strip()} IS MATCHED {sub.strip()}")
                 subs.append(f"{fullPath}/{sub.strip()}")
                 countMatch+=1
