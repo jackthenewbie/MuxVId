@@ -309,6 +309,8 @@ def main():
         if isOnlyOne(listKeyVid, returnParentDir(line.strip())):
             getAllSub=True
         for sub in open(f"./dump/{count}.txt"):
+            if sub=="":
+              continue
             if(getAllSub) is True:
                 #print(f"{returnParentDir(line.strip())} is only one")
                 subs.append(f"{fullPath}/{sub.strip()}")
