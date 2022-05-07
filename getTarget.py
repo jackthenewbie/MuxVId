@@ -130,7 +130,7 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     #Ignore words removal
     if bracketListIgnore!=None:
         for bracket in bracketListIgnore:
-            toFind=f'\{bracket[0]}[^)]*\{bracket[1]}'
+            toFind=f'\{bracket[0]}[^{bracket[1]}]*\{bracket[1]}'
             searchWordInbracket=re.findall(toFind, fileNameWithoutExtension)
             if searchWordInbracket != None:
                 print(f"Ignore: {searchWordInbracket}")
