@@ -152,7 +152,8 @@ def matchVideoAndSubtitle(filePath, subPath, bracketListIgnore=None):
     elif(searchSeriesTarget!=None and searchSeriesSub!=None): #detech series
         def remove0(word):
             word=list(word)
-            while c in word:
+            temp=word
+            for c in temp:
                 if c=="0":
                     word.remove("0")
             return ''.join(word).upper().lower()
