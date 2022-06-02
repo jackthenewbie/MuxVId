@@ -330,7 +330,7 @@ def main():
             if (args.limit_search==0 and countMatch==1) or (args.limit_search>0 and countMatch==args.limit_search):
                 break
         if subs != []:
-            db.append(generateMux(count, 0, dest, replaceSlash(escape((line.strip())), subs))
+            db.append(generateMux(count, 0, dest, replaceSlash(escape( line.strip() )), subs))
         else:
             print(f"This video: {line.strip()} has no subs")
         #print("\nSubs:",subs)
