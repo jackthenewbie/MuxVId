@@ -28,6 +28,10 @@ def getListFile(cmd,fileout):
     with open(fileout, 'w') as out:
         return_code = subprocess.call(cmd, stdout=out)
 #---------------------Finished generated list file-------------------------------------------------------------------------------------------------
+def escape(line):
+    if re.search(r"[^\\]`",line) :
+        return escape(re.sub("`", "\`", line))
+    return line
 def removeWithPrefix(filePath,postfix):
     fileNameWithoutExtension=os.path.splitext(os.path.basename(filePath))[0]
     search=re.search(f'_{postfix}$', fileNameWithoutExtension)
@@ -304,7 +308,8 @@ def main():
         count+=1
         #print(f"Full path: \"{dest}/{returnParentDir(line.strip())}\"")
         fullPath=f"{dest}/{returnParentDir(line.strip())}"
-        cmdFindSubFiles=['rclone', 'lsf', f"{dest}/{returnParentDir(line.strip())}", "--format", "p", '--files-only', '--include',  f'*.{subType}']
+        tmp=replaceSlash(escape(f"{dest}/{returnParentDir(line.strip())}"))
+        cmdFindSubFiles=['rclone', 'lsf', tmp, "--format", "p", '--files-only', '--include',  f'*.{subType}']
         os.makedirs("./dump", exist_ok=True)
         getListFile(cmdFindSubFiles, f"./dump/{count}.txt")
         if isOnlyOne(listKeyVid, returnParentDir(line.strip())):
@@ -314,18 +319,18 @@ def main():
               continue
             if(getAllSub) is True:
                 #print(f"{returnParentDir(line.strip())} is only one")
-                subs.append(f"{fullPath}/{sub.strip()}")
+                subs.append(replaceSlash(escape(f"{fullPath}/{sub.strip()}")))
                 countMatch+=1
             elif(matchVideoAndSubtitle(line.strip(), sub.strip(), bracket)):
                 print(f"{line.strip()} IS MATCHED {sub.strip()}")
-                subs.append(f"{fullPath}/{sub.strip()}")
+                subs.append(replaceSlash(escape(f"{fullPath}/{sub.strip()}")))
                 countMatch+=1
             else:
                 print(f"{line.strip()} NOT MATCHED {sub.strip()}")
             if (args.limit_search==0 and countMatch==1) or (args.limit_search>0 and countMatch==args.limit_search):
                 break
         if subs != []:
-            db.append(generateMux(count, 0, dest, replaceSlash(line.strip()), subs))
+            db.append(generateMux(count, 0, dest, replaceSlash(escape((line.strip())), subs))
         else:
             print(f"This video: {line.strip()} has no subs")
         #print("\nSubs:",subs)
