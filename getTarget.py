@@ -308,7 +308,8 @@ def main():
         count+=1
         #print(f"Full path: \"{dest}/{returnParentDir(line.strip())}\"")
         fullPath=f"{dest}/{returnParentDir(line.strip())}"
-        tmp=replaceSlash(escape(f"{dest}/{returnParentDir(line.strip())}"))
+        tmp=replaceSlash(escape(fullPath))
+        print(f"\nFetching sub from path: {tmp}\n")
         cmdFindSubFiles=['rclone', 'lsf', tmp, "--format", "p", '--files-only', '--include',  f'*.{subType}']
         os.makedirs("./dump", exist_ok=True)
         getListFile(cmdFindSubFiles, f"./dump/{count}.txt")
