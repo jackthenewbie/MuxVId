@@ -13,8 +13,9 @@ def getParentDirName(filePath):
         return getParentDirName('/'.join(listPath))
     return listPath[len(listPath)-1]
 data = json.load(open('conf.json'))
-client = pymongo.MongoClient(data['linkMongoDb'])
-db=client[data['dbName']]
+db=data['linkMongoDb']
+client = pymongo.MongoClient(str(db))
+db=client[str(data['dbName'])]
 dest=data['folderTarget']
 session=getParentDirName(dest)
 collection=db[f'Session:{session}']
